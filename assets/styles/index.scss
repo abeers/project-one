@@ -1,2 +1,24 @@
 $icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
 @import '~bootstrap-sass/assets/stylesheets/bootstrap';
+
+.board {
+  background-color: #999;
+  height: 300px;
+  width: 300px;
+}
+
+.cell {
+  background-color: #000;
+  border: 1px solid #fff;
+  float: left;
+  height: 33%;
+  width: 33%;
+}
+
+.x-occupied {
+  background-color: #990033;
+}
+
+.o-occupied {
+  background-color: #009933;
+}
