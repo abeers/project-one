@@ -1,0 +1,19 @@
+$deep-cerulean: #0485a4;
+$electric-lime: #d3ff1f;
+$flamenco-orange: #fe8306;
+$charcoal: #4e4e4e;
+$gray: #e5e5e5;
+$white: #fff;
+$black: #000;
+$red: #f00;
+$green: #0f0;
+$blue: #00f;
+
+
+@function tint($color, $percentage) {
+  @return mix($white, $color, $percentage);
+}
+
+@function shade($color, $percentage) {
+  @return mix($black, $color, $percentage);
+}

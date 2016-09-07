@@ -7,15 +7,17 @@
       <script src="bundle.js" type="text/javascript" charset="utf-8" defer></script>
     </head>
     <body class="container-fluid">
+      <nav class="navbar">
+        <button type="button" id="sign-in-button" class="btn btn-default navbar-btn navbar-right">Sign in</button>
+        <button type="button" id="sign-up-button" class="btn btn-default navbar-btn navbar-right">Sign up</button>
+        <button type="button" id="sign-out-button" class="btn btn-default navbar-btn navbar-right">Sign out</button>
+        <button type="button" id="change-password-button" class="btn btn-default navbar-btn navbar-right">Change password</button>
+        <button type="button" id="index-games-button" class="btn btn-default navbar-btn navbar-right">Get all games</button>
+        <button type="button" id="show-game-button" class="btn btn-default navbar-btn navbar-right">Get one game</button>
+        <button type="button" id="start-game-button" class="btn btn-default navbar-btn navbar-right">Start new game</button>
+      </nav>
       <h1>Tic Tac Toe</h1>
 
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-      eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-      minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-      ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-      velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-      cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
-      est laborum.</p>
       <form id="sign-up">
         <fieldset>
           <legend>Sign up!</legend>
@@ -77,15 +79,21 @@
       </form>
 
       <div class="board">
-        <div class="cell" data-id="0"></div>
-        <div class="cell" data-id="1"></div>
-        <div class="cell" data-id="2"></div>
-        <div class="cell" data-id="3"></div>
-        <div class="cell" data-id="4"></div>
-        <div class="cell" data-id="5"></div>
-        <div class="cell" data-id="6"></div>
-        <div class="cell" data-id="7"></div>
-        <div class="cell" data-id="8"></div>
+        <div class="row">
+          <div class="cell col-xs-4" data-id="0"></div>
+          <div class="cell col-xs-4" data-id="1"></div>
+          <div class="cell col-xs-4" data-id="2"></div>
+        </div>
+        <div class="row">
+          <div class="cell col-xs-4" data-id="3"></div>
+          <div class="cell col-xs-4" data-id="4"></div>
+          <div class="cell col-xs-4" data-id="5"></div>
+        </div>
+        <div class="row">
+          <div class="cell col-xs-4" data-id="6"></div>
+          <div class="cell col-xs-4" data-id="7"></div>
+          <div class="cell col-xs-4" data-id="8"></div>
+        </div>
       </div>
 
     </body>

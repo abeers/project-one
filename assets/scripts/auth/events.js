@@ -19,7 +19,7 @@ const onSignIn = function (event) {
   let data = getFormFields(event.target);
 
   api.signIn(data)
-    .done(ui.signInSuccess)
+    .done(ui.signInSuccess, $('#sign-in').hide())
     .fail(ui.failure);
 };
 
@@ -78,11 +78,29 @@ const addHandlers = () => {
   $('#sign-up').on('submit', onSignUp);
   $('#sign-in').on('submit', onSignIn);
   $('#change-password').on('submit', onChangePassword);
-  $('#sign-out').on('submit', onSignOut);
+  $('#sign-out-button').on('click', onSignOut);
   $('#index-games').on('submit', onGetGames);
   $('#show-game').on('submit', onGetGame);
   $('#start-game').on('submit', onStartGame);
   $('#update-game').on('submit', onUpdateGame);
+  $('#sign-in-button').on('click', function () {
+    $('#sign-in').show();
+  });
+  $('#change-password-button').on('click', function () {
+    $('#change-password').show();
+  });
+  $('#sign-up-button').on('click', function () {
+    $('#sign-up').show();
+  });
+  $('#index-games-button').on('click', function () {
+    $('#index-games').show();
+  });
+  $('#show-game-button').on('click', function () {
+    $('#show-game').show();
+  });
+  $('#start-game-button').on('click', function () {
+    $('#start-game').show();
+  });
 };
 
 module.exports = {

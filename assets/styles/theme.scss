@@ -1,0 +1,46 @@
+$background-color: $deep-cerulean;
+$header-font-color: $electric-lime;
+$button-background-color: $flamenco-orange;
+$font-color: $charcoal;
+
+body {
+  background-color: $background-color;
+  color: $font-color;
+}
+
+form {
+  margin: 10px 0;
+}
+
+// input {
+//   background-color: $button-background-color;
+// }
+
+.board {
+  height: 450px;
+  margin: 0 auto;
+  width: 450px;
+}
+
+.cell {
+  background-color: $white;
+  border: 1px solid $black;
+  height: 100%;
+}
+
+h1 {
+  color: $header-font-color;
+}
+
+.row {
+  height: 33.33333%;
+  width: 100%;
+}
+
+.x-occupied {
+  background-color: $flamenco-orange;
+}
+
+.o-occupied {
+  background-color: $electric-lime;
+}
