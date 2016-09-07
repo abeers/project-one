@@ -28,7 +28,7 @@ const getGamesSuccess = (data) => {
 
 const getGameSuccess = (data) => {
   app.user.currentGame = data.game;
-  console.log(app.user);
+  console.log(data);
   console.log("Got game " + data.game.id);
   $('.board').show();
 };
@@ -44,16 +44,21 @@ const updateGameSuccess = (data) => {
 };
 
 const renderGameBoard = (data) => {
-  //debugger;
   const cellArray = data.game.cells;
-  console.log(cellArray);
 
   for (let i = 0; i < cellArray.length; i++) {
     if(cellArray[i] !== '') {
       $('[data-id=' + i + ']').addClass(cellArray[i] + '-occupied');
-      console.log(cellArray[i]);
     }
   }
+};
+
+const winningCelebration = (player) => {
+  alert("Congratulations Player " + player);
+};
+
+const tieCelebration = () => {
+  alert("Tie");
 };
 
 const failure = (error) => {
@@ -70,5 +75,7 @@ module.exports = {
   getGameSuccess,
   startGameSuccess,
   updateGameSuccess,
-  renderGameBoard
+  renderGameBoard,
+  winningCelebration,
+  tieCelebration
 };

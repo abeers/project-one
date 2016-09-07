@@ -68,15 +68,6 @@
           <input type="submit" name="submit" value="Start game!">
         </fieldset>
       </form>
-      <form id="update-game">
-        <fieldset>
-          <legend>Update game</legend>
-          <input name="game[cell][index]" type="text" placeholder="Cell index">
-          <input name="game[cell][value]" type="text" placeholder="x or o">
-          <input name="game[over]" type="text" placeholder="Game is over?">
-          <input name="submit" type="submit" value="Update game">
-        </fieldset>
-      </form>
 
       <div class="board">
         <div class="row">
@@ -94,6 +85,15 @@
           <div class="cell col-xs-4" data-id="7"></div>
           <div class="cell col-xs-4" data-id="8"></div>
         </div>
+        <div class="cell col-xs-4" data-id="0" data-win-conditions='["horz0", "vert0", "diag0"]'></div>
+        <div class="cell col-xs-4" data-id="1" data-win-conditions='["horz0", "vert1"]'></div>
+        <div class="cell col-xs-4" data-id="2" data-win-conditions='["horz0", "vert2", "diag1"]'></div>
+        <div class="cell col-xs-4" data-id="3" data-win-conditions='["horz1", "vert0"]'></div>
+        <div class="cell col-xs-4" data-id="4" data-win-conditions='["horz1", "vert1", "diag0", "diag1"]'></div>
+        <div class="cell col-xs-4" data-id="5" data-win-conditions='["horz1", "vert2"]'></div>
+        <div class="cell col-xs-4" data-id="6" data-win-conditions='["horz2", "vert0", "diag1"]'></div>
+        <div class="cell col-xs-4" data-id="7" data-win-conditions='["horz2", "vert1"]'></div>
+        <div class="cell col-xs-4" data-id="8" data-win-conditions='["horz2", "vert2", "diag0"]'></div>
       </div>
 
     </body>
