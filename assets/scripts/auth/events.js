@@ -4,6 +4,9 @@ const getFormFields = require('../../../lib/get-form-fields');
 
 const api = require('./api');
 const ui = require('./ui');
+const logic = require('../logic');
+
+const app = require('../app');
 
 const onSignUp = function (event) {
   event.preventDefault();
@@ -53,7 +56,7 @@ const onGetGame = function (event) {
   let data = getFormFields(event.target);
 
   api.getGame(data)
-    .done(ui.getGameSuccess, ui.renderGameBoard)
+    .done(ui.getGameSuccess, ui.renderGameBoard, logic.setGameConditions)
     .fail(ui.failure);
 };
 
@@ -65,13 +68,40 @@ const onStartGame = function (event) {
     .fail(ui.failure);
 };
 
+const buildUpdateDataFromClick = function (event) {
+  let cellClicked = event.target;
+
+  let data = {};
+  data.game = {};
+  data.game.cell = {};
+  data.game.cell.index = $(cellClicked).data('id');
+  data.game.cell.value = app.player;
+  data.game.over = logic.isGameOver();
+
+  return data;
+};
+
 const onUpdateGame = function (event) {
   event.preventDefault();
-  let data = getFormFields(event.target);
+  let index = $(event.target).data('id');
 
-  api.updateGame(data)
-    .done(ui.updateGameSuccess, ui.renderGameBoard)
-    .fail(ui.failure);
+  if (!app.user.currentGame.over && logic.isValidMove(index)) {
+    let data = buildUpdateDataFromClick(event);
+    let indexWins = $('[data-id=' + index + ']').data('win-conditions');
+    logic.incrementGameConditions(indexWins, app.player);
+
+    api.updateGame(data)
+      .done(ui.updateGameSuccess, ui.renderGameBoard)
+      .fail(ui.failure);
+
+    if(logic.isGameWin()) {
+      ui.winningCelebration(app.player);
+    } else if (logic.isGameTie()) {
+      ui.tieCelebration();
+    } else {
+      logic.changePlayer();
+    }
+  }
 };
 
 const addHandlers = () => {
@@ -82,7 +112,7 @@ const addHandlers = () => {
   $('#index-games').on('submit', onGetGames);
   $('#show-game').on('submit', onGetGame);
   $('#start-game').on('submit', onStartGame);
-  $('#update-game').on('submit', onUpdateGame);
+  $('.cell').on('click', onUpdateGame);
 };
 
 module.exports = {
