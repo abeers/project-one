@@ -13,7 +13,7 @@ const onSignUp = function (event) {
   let data = getFormFields(event.target);
 
   api.signUp(data)
-    .done(ui.signUpSuccess)
+    .done(ui.signUpSuccess, $('sign-up').hide())
     .fail(ui.failure);
 };
 
@@ -31,7 +31,7 @@ const onChangePassword = function (event) {
   let data = getFormFields(event.target);
 
   api.changePassword(data)
-    .done(ui.changePasswordSuccess)
+    .done(ui.changePasswordSuccess, $('#change-password').hide())
     .fail(ui.failure);
 };
 
@@ -47,16 +47,26 @@ const onGetGames = function (event) {
   event.preventDefault();
 
   api.getGames()
-    .done(ui.getGamesSuccess)
+    .done(ui.getGamesSuccess, $('#index-games').hide())
     .fail(ui.failure);
+};
+
+const buildGetDataFromGame = function (game) {
+  let data = {};
+  data.game = {};
+  data.game.id = game.id;
+
+  return data;
 };
 
 const onGetGame = function (event) {
   event.preventDefault();
   let data = getFormFields(event.target);
-
+  // let data = buildGetDataFromGame(app.user.currentGame);
+  // console.log(data);
+  // console.log(buildGetDataFromApp());
   api.getGame(data)
-    .done(ui.getGameSuccess, ui.renderGameBoard, logic.setGameConditions)
+    .done(ui.getGameSuccess, $('#show-game').hide())
     .fail(ui.failure);
 };
 
@@ -64,7 +74,7 @@ const onStartGame = function (event) {
   event.preventDefault();
 
   api.startGame()
-    .done(ui.startGameSuccess)
+    .done(ui.startGameSuccess, $('#start-game').hide())
     .fail(ui.failure);
 };
 
@@ -86,19 +96,16 @@ const onUpdateGame = function (event) {
   let index = $(event.target).data('id');
 
   if (!app.user.currentGame.over && logic.isValidMove(index)) {
-    let data = buildUpdateDataFromClick(event);
     let indexWins = $('[data-id=' + index + ']').data('win-conditions');
     logic.incrementGameConditions(indexWins, app.player);
 
+    let data = buildUpdateDataFromClick(event);
+
     api.updateGame(data)
-      .done(ui.updateGameSuccess, ui.renderGameBoard)
+      .done(ui.updateGameSuccess)
       .fail(ui.failure);
 
-    if(logic.isGameWin()) {
-      ui.winningCelebration(app.player);
-    } else if (logic.isGameTie()) {
-      ui.tieCelebration();
-    } else {
+    if (!logic.isGameOver()) {
       logic.changePlayer();
     }
   }

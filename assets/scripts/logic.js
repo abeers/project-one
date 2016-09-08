@@ -28,8 +28,9 @@ const incrementGameConditions = (winCondArray, player) => {
   }
 };
 
-const setGameConditions = (data) => {
-  let cellArray = data.game.cells;
+const setGameConditions = () => {
+  app.player = 'x';
+  let cellArray = app.user.currentGame.cells;
   app.winConditions = winConditions;
 
   for (let i = 0; i < cellArray.length; i++) {
@@ -72,8 +73,8 @@ const isGameTie = () => {
       }
     }
 
-    return true;
   }
+  return true;
 };
 
 const isGameOver = () => {

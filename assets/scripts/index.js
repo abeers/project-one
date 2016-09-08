@@ -6,6 +6,9 @@ const authEvents = require('./auth/events.js');
 $(() => {
   $('.board').hide();
   $('form').hide();
+  $('nav > button').hide();
+  $('#sign-in-button').show();
+  $('#sign-up-button').show();
   authEvents.addHandlers();
 });
 
