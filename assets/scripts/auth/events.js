@@ -10,28 +10,34 @@ const app = require('../app');
 
 const onSignUp = function (event) {
   event.preventDefault();
-  let data = getFormFields(event.target);
+  let form = event.target;
+
+  let data = getFormFields(form);
 
   api.signUp(data)
-    .done(ui.signUpSuccess, $('sign-up').hide())
+    .done(ui.signUpSuccess, ui.hideForm(form))
     .fail(ui.failure);
 };
 
 const onSignIn = function (event) {
   event.preventDefault();
-  let data = getFormFields(event.target);
+  let form = event.target;
+
+  let data = getFormFields(form);
 
   api.signIn(data)
-    .done(ui.signInSuccess, $('#sign-in').hide())
+    .done(ui.signInSuccess, ui.hideForm(form))
     .fail(ui.failure);
 };
 
 const onChangePassword = function (event) {
   event.preventDefault();
-  let data = getFormFields(event.target);
+  let form = event.target;
+
+  let data = getFormFields(form);
 
   api.changePassword(data)
-    .done(ui.changePasswordSuccess, $('#change-password').hide())
+    .done(ui.changePasswordSuccess, ui.hideForm(form))
     .fail(ui.failure);
 };
 
@@ -45,36 +51,40 @@ const onSignOut = function (event) {
 
 const onGetGames = function (event) {
   event.preventDefault();
+  let form = event.target;
 
   api.getGames()
-    .done(ui.getGamesSuccess, $('#index-games').hide())
+    .done(ui.getGamesSuccess, ui.hideForm(form))
     .fail(ui.failure);
 };
 
-const buildGetDataFromGame = function (game) {
-  let data = {};
-  data.game = {};
-  data.game.id = game.id;
-
-  return data;
-};
+// const buildGetDataFromGame = function (game) {
+//   let data = {};
+//   data.game = {};
+//   data.game.id = game.id;
+//
+//   return data;
+// };
 
 const onGetGame = function (event) {
   event.preventDefault();
-  let data = getFormFields(event.target);
+  let form = event.target;
+
+  let data = getFormFields(form);
   // let data = buildGetDataFromGame(app.user.currentGame);
   // console.log(data);
   // console.log(buildGetDataFromApp());
   api.getGame(data)
-    .done(ui.getGameSuccess, $('#show-game').hide())
+    .done(ui.getGameSuccess, ui.hideForm(form))
     .fail(ui.failure);
 };
 
 const onStartGame = function (event) {
   event.preventDefault();
+  let form = event.target;
 
   api.startGame()
-    .done(ui.startGameSuccess, $('#start-game').hide())
+    .done(ui.startGameSuccess, ui.hideForm(form))
     .fail(ui.failure);
 };
 
@@ -120,24 +130,7 @@ const addHandlers = () => {
   $('#show-game').on('submit', onGetGame);
   $('#start-game').on('submit', onStartGame);
   $('.cell').on('click', onUpdateGame);
-  $('#sign-in-button').on('click', function () {
-    $('#sign-in').show();
-  });
-  $('#change-password-button').on('click', function () {
-    $('#change-password').show();
-  });
-  $('#sign-up-button').on('click', function () {
-    $('#sign-up').show();
-  });
-  $('#index-games-button').on('click', function () {
-    $('#index-games').show();
-  });
-  $('#show-game-button').on('click', function () {
-    $('#show-game').show();
-  });
-  $('#start-game-button').on('click', function () {
-    $('#start-game').show();
-  });
+  $('nav > button').on('click', ui.showForm);
 };
 
 module.exports = {

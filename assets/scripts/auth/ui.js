@@ -29,7 +29,15 @@ const celebration = () => {
 };
 
 
+const hideForm = (formId) => {
+  $(formId).hide();
+};
 
+const showForm = (event) => {
+  let buttonId = event.target.id;
+  let formId = '#' + buttonId.slice(0, -7);
+  $(formId).show();
+};
 
 const signUpSuccess = (data) => {
   console.log(data);
@@ -38,7 +46,6 @@ const signUpSuccess = (data) => {
 const signInSuccess = (data) => {
   app.user = data.user;
   console.log("Welcome," + app.user.email);
-  $("#user").html(app.user);
   $('nav > button').show();
   $('#sign-in-button').hide();
   $('#sign-up-button').hide();
@@ -101,5 +108,7 @@ module.exports = {
   startGameSuccess,
   updateGameSuccess,
   renderGameBoard,
-  celebration
+  celebration,
+  hideForm,
+  showForm
 };

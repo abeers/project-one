@@ -13,6 +13,12 @@ const winConditions = {
   'diag1': 0,
 };
 
+const clearGameConditions = () => {
+  for (let condition in winConditions) {
+    winConditions[condition] = 0;
+  }
+};
+
 const incrementGameConditions = (winCondArray, player) => {
   let increment = 0;
   if (player === 'x') {
@@ -30,6 +36,7 @@ const incrementGameConditions = (winCondArray, player) => {
 
 const setGameConditions = () => {
   app.player = 'x';
+  clearGameConditions();
   let cellArray = app.user.currentGame.cells;
   app.winConditions = winConditions;
 
