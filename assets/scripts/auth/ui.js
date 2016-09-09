@@ -6,8 +6,7 @@ const logic = require('../logic');
 
 
 const clearGameBoard = () => {
-  $('.cell').removeClass('x-occupied');
-  $('.cell').removeClass('o-occupied');
+  $('.cell').removeClass('x-occupied o-occupied d-occupied l-occupied');
 };
 
 const renderGameBoard = (game) => {
@@ -24,6 +23,19 @@ const renderGameBoard = (game) => {
 const celebration = () => {
   if (logic.isGameWin()) {
     $('#player-turn').html("Congratulations Player " + app.player);
+    let game1 = {};
+    game1.cells = ['d',app.player,'d',app.player,'l',app.player,'d',app.player,'d'];
+    let game2 = {};
+    game2.cells = [app.player,'l',app.player,'l','d','l',app.player,'l',app.player];
+    let game3 = {};
+    game3.cells = ['l','d','l','d',app.player,'d','l','d','l'];
+
+    let timeInterval = 500;
+    for (let i = 1; i < 10; i++) {
+      setTimeout(renderGameBoard, timeInterval*(3*i - 2), game1);
+      setTimeout(renderGameBoard, timeInterval*(3*i - 1), game2);
+      setTimeout(renderGameBoard, timeInterval*(3*i), game3);
+    }
   } else if (logic.isGameTie()) {
     $('#player-turn').html("Tie");
   }

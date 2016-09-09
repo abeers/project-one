@@ -94,8 +94,16 @@ a {
   height: 33.33333%;
 }
 
+.l-occupied {
+  background-color: tint($x-cell-color, 100);
+}
+
 .x-occupied {
   background-color: $x-cell-color;
+}
+
+.d-occupied {
+  background-color: shade($x-cell-color, 100);
 }
 
 .o-occupied {
