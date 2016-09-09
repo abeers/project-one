@@ -1,20 +1,29 @@
 $background-color: $deep-cerulean;
+$navbar-background-color: tint($background-color, 10);
+$navbutton-background-color: shade($background-color, 30);
+$message-background-color: tint($electric-lime, 20);
+$font-color: $black;
 $header-font-color: $electric-lime;
-$button-background-color: $flamenco-orange;
-$font-color: $charcoal;
+$accent-font-color: $white;
+$unoccupied-cell-color: $white;
+$cell-border-color: $background-color;
+$x-cell-color: $flamenco-orange;
+$o-cell-color: $electric-lime;
+
+$border-radius: 10px;
 
 body {
   background-color: $background-color;
   color: $font-color;
+  font-family: $font-family;
+  font-size: $font-size;
+  line-height: $line-height;
+  margin: $vertical-margin auto;
 }
 
 form {
   margin: 10px 0;
 }
-
-// input {
-//   background-color: $button-background-color;
-// }
 
 .board {
   height: 450px;
@@ -23,24 +32,71 @@ form {
 }
 
 .cell {
-  background-color: $white;
-  border: 1px solid $black;
+  background-color: $unoccupied-cell-color;
+  border: 10px solid $cell-border-color;
+  border-radius: (2 * $border-radius);
   height: 100%;
 }
 
 h1 {
   color: $header-font-color;
+  font-family: $title-font-family;
+  font-size: (3 * $font-size);
+  line-height: $line-height;
+  text-align: center;
 }
 
-.row {
+p {
+  text-align: justify;
+}
+
+a {
+  color: $header-font-color;
+}
+
+.nav-button {
+  background-color: $navbutton-background-color;
+  border: 5px solid $navbar-background-color;
+  border-radius: $border-radius;
+  color: $accent-font-color;
+  cursor: pointer;
+  height: 50px;
+  margin: 0;
+  padding: 10px;
+}
+
+.dropmenu {
+  background-color: $navbutton-background-color;
+  padding: 30px 10px 10px;
+}
+
+.navbar {
+  background-color: $navbar-background-color;
+  border: 0;
+  font-size: (.9 * $font-size);
+  margin: 0;
+  // padding: 0 20px;
+  text-align: center;
+}
+
+.board-row {
   height: 33.33333%;
-  width: 100%;
 }
 
 .x-occupied {
-  background-color: $flamenco-orange;
+  background-color: $x-cell-color;
 }
 
 .o-occupied {
-  background-color: $electric-lime;
+  background-color: $o-cell-color;
+}
+
+span {
+  color: $accent-font-color;
+}
+
+.message {
+  background-color: $message-background-color;
+  border-radius: $border-radius;
+  padding: 20px;
 }

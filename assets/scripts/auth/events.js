@@ -130,7 +130,10 @@ const addHandlers = () => {
   $('#show-game').on('submit', onGetGame);
   $('#start-game').on('submit', onStartGame);
   $('.cell').on('click', onUpdateGame);
-  $('nav > button').on('click', ui.showForm);
+  $('nav > .navbar-right, span').on('click', ui.showForm);
+  $('#dropmenu > li').on('click', ui.showForm);
+  $('#menu-button, #dropmenu').hover(ui.showMenu, ui.hideMenu);
+  // $('#dropmenu').hover(ui.showMenu, ui.hideMenu);
 };
 
 module.exports = {

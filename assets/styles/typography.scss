@@ -1,19 +1,8 @@
+$title-font-family: 'Shojumaru', cursive;
+$font-family: 'Poppins', sans-serif;
 $font-size: 18px;
+
 $line-height: 1.6;
 $max-width: 650px;
 $vertical-margin: 40px;
 $horizontal-padding: 10px;
-
-
-body {
-  font-size: $font-size;
-  line-height: $line-height;
-  margin: $vertical-margin auto;
-  max-width: $max-width;
-  padding: 0 $horizontal-padding;
-}
-
-header {
-  font-size: $font-size;
-  line-height: $line-height;
-}

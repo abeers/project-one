@@ -22,10 +22,14 @@ const renderGameBoard = (data) => {
 
 const celebration = () => {
   if (logic.isGameWin()) {
-    alert("Congratulations Player " + app.player);
+    $('#player-turn').html("Congratulations Player " + app.player);
   } else if (logic.isGameTie()) {
-    alert("Tie");
+    $('#player-turn').html("Tie");
   }
+};
+
+const updatePlayerTurn = () => {
+  $('#player-turn').html("Player " + app.player + ", it's your turn");
 };
 
 
@@ -34,9 +38,23 @@ const hideForm = (formId) => {
 };
 
 const showForm = (event) => {
+  $('form').hide();
   let buttonId = event.target.id;
   let formId = '#' + buttonId.slice(0, -7);
   $(formId).show();
+};
+
+const showMenu = () => {
+  $('#dropmenu').show();
+};
+
+const hideMenu = () => {
+  $('#dropmenu').hide();
+};
+
+const toggleSignInButtons = () => {
+  $('.nav-button').toggle();
+  $('#sign-in-name').toggle();
 };
 
 const signUpSuccess = (data) => {
@@ -45,10 +63,9 @@ const signUpSuccess = (data) => {
 
 const signInSuccess = (data) => {
   app.user = data.user;
-  console.log("Welcome," + app.user.email);
-  $('nav > button').show();
-  $('#sign-in-button').hide();
-  $('#sign-up-button').hide();
+  $('#sign-in-name').html(app.user.email);
+  toggleSignInButtons();
+  $('#welcome').html("Hello, " + app.user.email);
 };
 
 const changePasswordSuccess = () => {
@@ -58,10 +75,11 @@ const changePasswordSuccess = () => {
 const signOutSuccess = () => {
   app.user = null;
   console.log("Sign out successful");
-  $('nav > button').hide();
-  $('#sign-in-button').show();
-  $('#sign-up-button').show();
+  toggleSignInButtons();
   $('.board').hide();
+  $('#welcome').html("Thanks for playing!");
+  $('#welcome').show();
+  $('#player-turn').hide();
 };
 
 const getGamesSuccess = (data) => {
@@ -78,6 +96,7 @@ const getGameSuccess = (data) => {
   // console.log(data);
   console.log("Got game " + data.game.id);
   $('.board').show();
+  $('#welcome').hide();
 };
 
 const startGameSuccess = (data) => {
@@ -89,6 +108,7 @@ const startGameSuccess = (data) => {
 const updateGameSuccess = (data) => {
   app.user.currentGame = data.game;
   renderGameBoard(data);
+  updatePlayerTurn();
   celebration();
   console.log(data);
 };
@@ -110,5 +130,9 @@ module.exports = {
   renderGameBoard,
   celebration,
   hideForm,
-  showForm
+  showForm,
+  showMenu,
+  hideMenu,
+  toggleSignInButtons,
+  updatePlayerTurn
 };
