@@ -41,7 +41,7 @@
       <div class="col-xs-12 col-sm-8 col-md-6">
         <h1>Tactico</h1>
         <div id="instructions" class="message">
-          <p id="welcome">
+          <p>
             Welcome to Tactico, a new tic tac toe experience!
           </p>
           <p>
@@ -49,7 +49,7 @@
             The first player to place three squares in a line or place five squares total wins! If both players have four squares placed and neither player has three squares in a line, the game is a tie.
           </p>
           <p>
-            Will you go for the obvious move for a quick win or will you try to set up a stronger position for next turn? More importantly, do you know what your opponent will do? Please <span>sign up</span> or <span>sign in</span> to play now!
+            Will you go for the obvious move for a quick win or will you try to set up a stronger position for next turn? More importantly, do you know what your opponent will do? Sign in to play now!
           </p>
         </div>
 
@@ -95,7 +95,8 @@
         <form id="start-game">
           <fieldset>
             <legend>Start game!</legend>
-            <input type="submit" name="submit" value="Start game!">
+            <input type="button" class="start-button" value="Standard" data-mode="standard">
+            <input type="button" class="start-button" value="Tactico" data-mode="tactico">
           </fieldset>
         </form>
 

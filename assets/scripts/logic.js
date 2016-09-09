@@ -65,18 +65,42 @@ const isGameWin = () => {
     }
   }
 
+  if (app.mode === 'tactico') {
+    let boardArray = app.user.currentGame.cells;
+    let count = 0;
+    for (let i = 0; i < boardArray.length; i++) {
+      if (app.player === boardArray[i]) {
+        if (++count === 5) {
+          return true;
+        }
+      }
+    }
+  }
+
   return false;
 };
 
 const isGameTie = () => {
+  let boardArray = app.user.currentGame.cells;
+
   if (isGameWin()) {
     return false;
-  } else {
-    let boardArray = app.user.currentGame.cells;
+  } else if (app.mode === 'standard') {
 
     for (let i = 0; i < boardArray.length; i++) {
       if (boardArray[i] === '') {
         return false;
+      }
+    }
+
+  } else if (app.mode === 'tactico') {
+    let count = 0;
+
+    for (let i = 0; i < boardArray.length; i++) {
+      if (boardArray[i] === '') {
+        if (++count === 2) {
+          return false;
+        }
       }
     }
 

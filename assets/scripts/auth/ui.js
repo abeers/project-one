@@ -10,8 +10,9 @@ const clearGameBoard = () => {
   $('.cell').removeClass('o-occupied');
 };
 
-const renderGameBoard = (data) => {
-  const cellArray = data.game.cells;
+const renderGameBoard = (game) => {
+  clearGameBoard();
+  const cellArray = game.cells;
 
   for (let i = 0; i < cellArray.length; i++) {
     if(cellArray[i] !== '') {
@@ -65,7 +66,6 @@ const signInSuccess = (data) => {
   app.user = data.user;
   $('#sign-in-name').html(app.user.email);
   toggleSignInButtons();
-  $('#welcome').html("Hello, " + app.user.email);
 };
 
 const changePasswordSuccess = () => {
@@ -77,8 +77,8 @@ const signOutSuccess = () => {
   console.log("Sign out successful");
   toggleSignInButtons();
   $('.board').hide();
-  $('#welcome').html("Thanks for playing!");
-  $('#welcome').show();
+  $('#instructions').html("Thanks for playing!");
+  $('#instructions').show();
   $('#player-turn').hide();
 };
 
@@ -88,26 +88,30 @@ const getGamesSuccess = (data) => {
 };
 
 const getGameSuccess = (data) => {
-  clearGameBoard();
-
   app.user.currentGame = data.game;
-  renderGameBoard(data);
+  renderGameBoard(data.game);
   logic.setGameConditions();
   // console.log(data);
   console.log("Got game " + data.game.id);
+  updatePlayerTurn();
   $('.board').show();
-  $('#welcome').hide();
+  $('#instructions').hide();
 };
 
 const startGameSuccess = (data) => {
   console.log("Start game successful");
   console.log(data);
   app.user.currentGame = data.game;
+  renderGameBoard(data.game);
+  logic.setGameConditions();
+  updatePlayerTurn();
+  $('.board').show();
+  $('#instructions').hide();
 };
 
 const updateGameSuccess = (data) => {
   app.user.currentGame = data.game;
-  renderGameBoard(data);
+  renderGameBoard(data.game);
   updatePlayerTurn();
   celebration();
   console.log(data);

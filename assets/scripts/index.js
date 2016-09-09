@@ -14,7 +14,3 @@ $(() => {
   $('#dropmenu').hide();
   authEvents.addHandlers();
 });
-
-// $('#sign-in-button').on('click', function () {
-//   $('#signInModal').modal('show');
-// });
