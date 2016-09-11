@@ -12,5 +12,9 @@ $(() => {
   $('#sign-up-button').show();
   $('#menu-button').hide();
   $('#dropmenu').hide();
+  $('#password-message').hide();
+  $('.player-bar').hide();
+  $('#total-games').hide();
+  $('.winner').hide();
   authEvents.addHandlers();
 });

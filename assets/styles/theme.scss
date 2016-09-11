@@ -98,16 +98,20 @@ a {
   background-color: tint($x-cell-color, 100);
 }
 
-.x-occupied {
+.x-occupied,
+.left-side {
   background-color: $x-cell-color;
+  text-align: center;
 }
 
 .d-occupied {
   background-color: shade($x-cell-color, 100);
 }
 
-.o-occupied {
+.o-occupied,
+.right-side {
   background-color: $o-cell-color;
+  text-align: center;
 }
 
 span {

@@ -22,7 +22,8 @@ const renderGameBoard = (game) => {
 
 const celebration = () => {
   if (logic.isGameWin()) {
-    $('#player-turn').html("Congratulations Player " + app.player);
+    $('#' + app.player + "-winner").show();
+    $('.turn').hide();
     let game1 = {};
     game1.cells = ['d',app.player,'d',app.player,'l',app.player,'d',app.player,'d'];
     let game2 = {};
@@ -30,19 +31,28 @@ const celebration = () => {
     let game3 = {};
     game3.cells = ['l','d','l','d',app.player,'d','l','d','l'];
 
-    let timeInterval = 500;
-    for (let i = 1; i < 10; i++) {
-      setTimeout(renderGameBoard, timeInterval*(3*i - 2), game1);
-      setTimeout(renderGameBoard, timeInterval*(3*i - 1), game2);
-      setTimeout(renderGameBoard, timeInterval*(3*i), game3);
+    let timeInterval = 300;
+    let cycles = 10;
+    let frames = 3;
+    for (let i = 1; i < cycles; i++) {
+      setTimeout(renderGameBoard, timeInterval*(frames*i - 2), game1);
+      setTimeout(renderGameBoard, timeInterval*(frames*i - 1), game2);
+      setTimeout(renderGameBoard, timeInterval*(frames*i), game3);
     }
+    setTimeout(renderGameBoard, timeInterval*(frames*cycles), app.user.currentGame);
   } else if (logic.isGameTie()) {
-    $('#player-turn').html("Tie");
+    // $('#player-turn').html("Tie");
   }
 };
 
+const setPlayers = () => {
+  $('#x-player').html(app.user.currentGame.player_x.email);
+  $('#o-player').html(app.user.currentGame.player_o.email);
+};
+
 const updatePlayerTurn = () => {
-  $('#player-turn').html("Player " + app.player + ", it's your turn");
+  // $('#player-turn').html("Player " + app.player + ", it's your turn");
+  $('.turn').toggle();
 };
 
 
@@ -91,12 +101,13 @@ const signOutSuccess = () => {
   $('.board').hide();
   $('#instructions').html("Thanks for playing!");
   $('#instructions').show();
-  $('#player-turn').hide();
+  $('.winner').hide();
 };
 
 const getGamesSuccess = (data) => {
   app.user.games = data.games;
   console.log(app.user);
+  $('#total-games').html(data.games.length + " games played").show();
 };
 
 const getGameSuccess = (data) => {
@@ -108,6 +119,7 @@ const getGameSuccess = (data) => {
   updatePlayerTurn();
   $('.board').show();
   $('#instructions').hide();
+  $('.winner').hide();
 };
 
 const startGameSuccess = (data) => {
@@ -116,9 +128,14 @@ const startGameSuccess = (data) => {
   app.user.currentGame = data.game;
   renderGameBoard(data.game);
   logic.setGameConditions();
+  // setPlayers();
   updatePlayerTurn();
   $('.board').show();
   $('#instructions').hide();
+  $('.player-bar').show();
+  $('.left-side .turn').show();
+  $('.right-side .turn').hide();
+  $('.winner').hide();
 };
 
 const updateGameSuccess = (data) => {

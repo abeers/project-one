@@ -10,22 +10,19 @@ const app = require('../app');
 
 
 
-
-
-
-
-
-
-
 const onSignUp = function (event) {
   event.preventDefault();
   let form = event.target;
 
   let data = getFormFields(form);
 
-  api.signUp(data)
-    .done(ui.signUpSuccess, ui.hideForm(form))
-    .fail(ui.failure);
+  if (data.credentials.password === data.credentials.password_confirmation) {
+    api.signUp(data)
+      .done(ui.signUpSuccess, ui.hideForm(form), $('#password-message').hide())
+      .fail(ui.failure);
+  } else {
+    $('#password-message').show();
+  }
 };
 
 const onSignIn = function (event) {
