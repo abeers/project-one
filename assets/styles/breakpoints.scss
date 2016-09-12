@@ -1,20 +1,15 @@
 @import 'breakpoint';
 
-// body {
-//   @include breakpoint(tiny) {
-//     font-size: $font-size * 1.2;
-//     max-width: 100%;
-//   }
-//
-//   // @include breakpoint(small) {
-//   //   background-color: $red;
-//   // }
-//   //
-//   // @include breakpoint(medium) {
-//   //   background-color: $blue;
-//   // }
-//   //
-//   // @include breakpoint(large) {
-//   //   background-color: $green;
-//   // }
-// }
+body {
+  @include breakpoint(tiny) {
+    font-size: $font-size * 1.2;
+    max-width: 100%;
+  }
+}
+
+.left-side,
+.right-side {
+  @include breakpoint(tiny) {
+    display: none;
+  }
+}

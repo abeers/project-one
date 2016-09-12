@@ -30,35 +30,24 @@
     </nav>
 
     <div class = "row">
-      <div class="left-side col-sm-2 col-md-3">
-        <ul id="dropmenu" class="nav nav-pills nav-stacked dropmenu">
-          <li role="presentation"><a href="#" id="change-password-button">Change password</a></li>
-          <li role="presentation"><a href="#" id="index-games-button">Get all games</a></li>
-          <li role="presentation"><a href="#" id="show-game-button">Get one game</a></li>
-          <li role="presentation"><a href="#" id="start-game-button">Start new game</a></li>
-        </ul>
+      <ul id="dropmenu" class="nav nav-pills nav-stacked dropmenu">
+        <li role="presentation"><a href="#" id="change-password-button">Change password</a></li>
+        <li role="presentation"><a href="#" id="index-games-button">Get games played</a></li>
+        <li role="presentation"><a href="#" id="show-game-button">Get one game</a></li>
+        <li role="presentation"><a href="#" id="start-game-button">Start new game</a></li>
+      </ul>
+
+      <div class="left-side col-xs-0 col-sm-3">
         <div class="player-bar">
           <h3 id="x-player">Player X</h3>
           <p id="x-player-games"></p>
-          <div class="turn">Current Turn</div>
+          <div id="x-turn" class="turn">Current Turn</div>
           <div id="x-winner" class="winner">You Win!</div>
         </div>
       </div>
 
-      <div class="col-xs-12 col-sm-8 col-md-6">
-        <h1>Tactico</h1>
-        <div id="instructions" class="message">
-          <p>
-            Welcome to Tactico, a new tic tac toe experience!
-          </p>
-          <p>
-            Players will take turns as <span>attackers</span> and <span>defenders</span>. First, the defender secretly chooses a square to block. Then the attacker attempts to claim an empty square. If the attacker chooses the same square that the defender chose, the attacker has been blocked; no squares are placed and the players switch roles.
-            The first player to place three squares in a line or place five squares total wins! If both players have four squares placed and neither player has three squares in a line, the game is a tie.
-          </p>
-          <p>
-            Will you go for the obvious move for a quick win or will you try to set up a stronger position for next turn? More importantly, do you know what your opponent will do? Sign in to play now!
-          </p>
-        </div>
+      <div class="col-xs-12 col-sm-6">
+        <h1 id="game-title" class="header">Tactico</h1>
 
         <form id="sign-up">
           <fieldset>
@@ -76,6 +65,7 @@
             <input type="email" name="credentials[email]" placeholder="Email">
             <input type="password" name="credentials[password]" placeholder="Password">
             <input type="submit" name="submit" value="Sign in!">
+            <p id="sign-in-message">Sign in information does not match our records</p>
           </fieldset>
         </form>
         <form id="change-password">
@@ -87,12 +77,6 @@
           </fieldset>
         </form>
 
-        <form id="index-games">
-          <fieldset>
-            <legend>Get all games!</legend>
-            <input type="submit" name="submit" value="Get all games!">
-          </fieldset>
-        </form>
         <form id="show-game">
           <fieldset>
             <legend>Get one game!</legend>
@@ -107,6 +91,21 @@
             <input type="button" class="start-button" value="Tactico" data-mode="tactico">
           </fieldset>
         </form>
+
+        <div id="goodbye" class="message">Thanks for playing!</div>
+
+        <div id="instructions" class="message">
+          <p>
+            Welcome to Tactico, a new tic tac toe experience!
+          </p>
+          <p>
+            Players will take turns as <span>attackers</span> and <span>defenders</span>. First, the defender secretly chooses a square to block. Then the attacker attempts to claim an empty square. If the attacker chooses the same square that the defender chose, the attacker has been blocked; no squares are placed and the players switch roles.
+            The first player to place three squares in a line or place five squares total wins! If both players have four squares placed and neither player has three squares in a line, the game is a tie.
+          </p>
+          <p>
+            Will you go for the obvious move for a quick win or will you try to set up a stronger position for next turn? More importantly, do you know what your opponent will do? Sign in to play now!
+          </p>
+        </div>
 
         <div class="board">
           <div class="row board-row">
@@ -127,11 +126,13 @@
         </div>
       </div>
 
-      <div class="right-side player-bar col-sm-2 col-md-3">
-        <h3 id="o-player">Player O</h3>
-        <p id="o-player-games"></p>
-        <div class="turn">Current Turn</div>
-        <div id="o-winner" class="winner">You Win!</div>
+      <div class="right-side col-xs-0 col-sm-3">
+        <div class="player-bar">
+          <h3 id="o-player">Player O</h3>
+          <p id="o-player-games"></p>
+          <div id="o-turn" class="turn">Current Turn</div>
+          <div id="o-winner" class="winner">You Win!</div>
+        </div>
       </div>
     </div>
 

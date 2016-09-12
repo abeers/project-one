@@ -22,6 +22,7 @@ const renderGameBoard = (game) => {
 
 const celebration = () => {
   if (logic.isGameWin()) {
+    $('#' + app.player + "-winner").html('You Win!');
     $('#' + app.player + "-winner").show();
     $('.turn').hide();
     let game1 = {};
@@ -31,8 +32,8 @@ const celebration = () => {
     let game3 = {};
     game3.cells = ['l','d','l','d',app.player,'d','l','d','l'];
 
-    let timeInterval = 300;
-    let cycles = 10;
+    let timeInterval = 250;
+    let cycles = 8;
     let frames = 3;
     for (let i = 1; i < cycles; i++) {
       setTimeout(renderGameBoard, timeInterval*(frames*i - 2), game1);
@@ -41,17 +42,37 @@ const celebration = () => {
     }
     setTimeout(renderGameBoard, timeInterval*(frames*cycles), app.user.currentGame);
   } else if (logic.isGameTie()) {
-    // $('#player-turn').html("Tie");
+    $('.winner').html('Tie');
+    $('.winner').show();
+    $('.turn').hide();
+    let game1 = {};
+    game1.cells = ['d','l','l','l','d','l','l','l','d'];
+    let game2 = {};
+    game2.cells = ['l','d','l','l','d','l','l','d','l'];
+    let game3 = {};
+    game3.cells = ['l','l','d','l','d','l','d','l','l'];
+    let game4 = {};
+    game4.cells = ['l','l','l','d','d','d','l','l','l'];
+
+    let timeInterval = 250;
+    let cycles = 6;
+    let frames = 4;
+    for (let i = 1; i < cycles; i++) {
+      setTimeout(renderGameBoard, timeInterval*(frames*i - 3), game1);
+      setTimeout(renderGameBoard, timeInterval*(frames*i - 2), game2);
+      setTimeout(renderGameBoard, timeInterval*(frames*i - 1), game3);
+      setTimeout(renderGameBoard, timeInterval*(frames*i), game4);
+    }
+    setTimeout(renderGameBoard, timeInterval*(frames*cycles), app.user.currentGame);
   }
 };
 
-const setPlayers = () => {
-  $('#x-player').html(app.user.currentGame.player_x.email);
-  $('#o-player').html(app.user.currentGame.player_o.email);
-};
+// const setPlayers = () => {
+//   $('#x-player').html(app.user.currentGame.player_x.email);
+//   $('#o-player').html(app.user.currentGame.player_o.email);
+// };
 
 const updatePlayerTurn = () => {
-  // $('#player-turn').html("Player " + app.player + ", it's your turn");
   $('.turn').toggle();
 };
 
@@ -65,6 +86,7 @@ const showForm = (event) => {
   let buttonId = event.target.id;
   let formId = '#' + buttonId.slice(0, -7);
   $(formId).show();
+  $('#sign-in-message').hide();
 };
 
 const showMenu = () => {
@@ -80,13 +102,15 @@ const toggleSignInButtons = () => {
   $('#sign-in-name').toggle();
 };
 
-const signUpSuccess = (data) => {
-  console.log(data);
+const signUpSuccess = () => {
+  $('#sign-in').show();
 };
 
 const signInSuccess = (data) => {
   app.user = data.user;
   $('#sign-in-name').html(app.user.email);
+  $('#instructions').show();
+  $('#goodbye').hide();
   toggleSignInButtons();
 };
 
@@ -96,17 +120,17 @@ const changePasswordSuccess = () => {
 
 const signOutSuccess = () => {
   app.user = null;
-  console.log("Sign out successful");
   toggleSignInButtons();
   $('.board').hide();
-  $('#instructions').html("Thanks for playing!");
-  $('#instructions').show();
-  $('.winner').hide();
+  $('#goodbye').show();
+  $('.player-bar').hide();
+  $('#total-games').hide();
+  $('#instructions').hide();
+  $('#game-title').removeClass('header-attack header-defend header-x header-o');
 };
 
 const getGamesSuccess = (data) => {
   app.user.games = data.games;
-  console.log(app.user);
   $('#total-games').html(data.games.length + " games played").show();
 };
 
@@ -114,8 +138,6 @@ const getGameSuccess = (data) => {
   app.user.currentGame = data.game;
   renderGameBoard(data.game);
   logic.setGameConditions();
-  // console.log(data);
-  console.log("Got game " + data.game.id);
   updatePlayerTurn();
   $('.board').show();
   $('#instructions').hide();
@@ -123,27 +145,30 @@ const getGameSuccess = (data) => {
 };
 
 const startGameSuccess = (data) => {
-  console.log("Start game successful");
-  console.log(data);
   app.user.currentGame = data.game;
   renderGameBoard(data.game);
   logic.setGameConditions();
-  // setPlayers();
-  updatePlayerTurn();
   $('.board').show();
   $('#instructions').hide();
   $('.player-bar').show();
   $('.left-side .turn').show();
   $('.right-side .turn').hide();
+  $('#game-title').removeClass('header-attack header-defend header-x header-o');
+  $('#game-title').addClass('header-' + app.player);
+  if (app.mode === 'tactico') {
+    $('#game-title').removeClass('header-' + app.player);
+    updatePlayerTurn();
+    logic.changePlayer();
+    $('#' + app.player + '-turn').html('Defend');
+    $('#game-title').addClass('header-' + app.player + ' header-defend');
+  }
   $('.winner').hide();
 };
 
 const updateGameSuccess = (data) => {
   app.user.currentGame = data.game;
   renderGameBoard(data.game);
-  updatePlayerTurn();
   celebration();
-  console.log(data);
 };
 
 const failure = (error) => {
