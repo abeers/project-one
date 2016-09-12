@@ -126,8 +126,10 @@ const updateStandardGame = () => {
   }
 
   if (!logic.isGameOver()) {
+    $('#game-title').removeClass('header-' + app.player);
     logic.changePlayer();
     ui.updatePlayerTurn();
+    $('#game-title').addClass('header-' + app.player);
   }
 };
 
