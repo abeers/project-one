@@ -16,5 +16,6 @@ $(() => {
   $('.player-bar').hide();
   $('#total-games').hide();
   $('.winner').hide();
+  $('#goodbye').hide();
   authEvents.addHandlers();
 });

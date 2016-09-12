@@ -4,7 +4,7 @@ $navbutton-background-color: shade($background-color, 30);
 $message-background-color: tint($electric-lime, 20);
 $font-color: $black;
 $header-font-color: $electric-lime;
-$accent-font-color: $white;
+$accent-font-color: $flamenco-orange;
 $unoccupied-cell-color: $white;
 $cell-border-color: $background-color;
 $x-cell-color: $flamenco-orange;
@@ -71,6 +71,7 @@ a {
   opacity: .92;
   padding: 30px 10px 10px;
   position: fixed;
+  text-align: left;
   z-index: 2;
 }
 
@@ -95,7 +96,7 @@ a {
 }
 
 .l-occupied {
-  background-color: tint($x-cell-color, 100);
+  background-color: $white;
 }
 
 .x-occupied,
@@ -105,7 +106,7 @@ a {
 }
 
 .d-occupied {
-  background-color: shade($x-cell-color, 100);
+  background-color: $charcoal;
 }
 
 .o-occupied,
@@ -116,10 +117,32 @@ a {
 
 span {
   color: $accent-font-color;
+  font-weight: bold;
 }
 
 .message {
   background-color: $message-background-color;
   border-radius: $border-radius;
   padding: 20px;
+}
+
+.header {
+  border-radius: $border-radius;
+  text-shadow: -2px 0 $font-color, 0 2px $font-color, 2px 0 $font-color, 0 -2px $font-color;
+}
+
+.header-x {
+  color: $x-cell-color;
+}
+
+.header-o {
+  color: $o-cell-color;
+}
+
+.header-attack {
+  background-color: tint($black, 80);
+}
+
+.header-defend {
+  background-color: $charcoal;
 }
