@@ -131,7 +131,7 @@ const signOutSuccess = () => {
 
 const getGamesSuccess = (data) => {
   app.user.games = data.games;
-  $('#total-games').html(data.games.length + " games played").show();
+  $('#total-games').html("G: " + data.games.length).show();
 };
 
 const getGameSuccess = (data) => {

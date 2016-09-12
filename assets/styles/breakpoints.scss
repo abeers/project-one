@@ -3,13 +3,5 @@
 body {
   @include breakpoint(tiny) {
     font-size: $font-size * 1.2;
-    max-width: 100%;
-  }
-}
-
-.left-side,
-.right-side {
-  @include breakpoint(tiny) {
-    display: none;
   }
 }
